@@ -29,7 +29,8 @@ function Login() {
     cursor: "pointer",
   };
   function newData(e) {
-    console.log(e.target.value, "::::::::::::::::");
+    localStorage.setItem("isLoggedIn", true);
+    console.log(localStorage.isLoggedIn);
   }
   return (
     <>
