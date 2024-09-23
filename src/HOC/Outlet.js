@@ -1,14 +1,21 @@
-// import React from 'react';
+import React, { useEffect } from "react";
 import { Navigate } from "react-router-dom";
 import NavbarHeader from "../components/Navbar";
 
 export const withLogging = (WrappedComponent) => {
-  const isAuth = () => localStorage.getItem("isLoggedIn");
   return () => {
+    const isAuth = () => {
+        console.log('requested', localStorage.getItem("isLoggedIn"))
+      return localStorage.getItem("isLoggedIn");
+    };
+    useEffect(()=>{
+        console.log('mounted',isAuth())
+        isAuth()
+    },[])
     return (
       <>
-        {isAuth ? <NavbarHeader /> : null}
-        {isAuth ? <WrappedComponent /> : <Navigate to="/login" />}
+        {isAuth() ? <NavbarHeader /> : null}
+        {isAuth() ? <WrappedComponent /> : <Navigate to="/login" />}
       </>
     );
   };
