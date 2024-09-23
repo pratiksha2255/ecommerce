@@ -21,6 +21,10 @@ function NavbarHeader() {
     navigate("/login");
   }
 
+  function login() {
+    navigate("/login");
+  }
+
   return (
     <>
       <Navbar style={navStyle} bg="light" data-bs-theme="dark">
@@ -35,9 +39,15 @@ function NavbarHeader() {
             <Nav.Link href="/contact" style={navLinkStyle}>
               Contact
             </Nav.Link>
-            <Nav.Link onClick={() => logout()} style={navLinkStyle}>
-              Logout
-            </Nav.Link>
+            {localStorage.getItem("isLoggedIn") ? (
+              <Nav.Link onClick={() => logout()} style={navLinkStyle}>
+                Logout
+              </Nav.Link>
+            ) : (
+              <Nav.Link onClick={() => login()} style={navLinkStyle}>
+                Login
+              </Nav.Link>
+            )}
             <Nav.Link href="/cart" style={navLinkStyle}>
               Cart {cart}
             </Nav.Link>
