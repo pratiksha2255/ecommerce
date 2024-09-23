@@ -1,14 +1,21 @@
+<<<<<<< HEAD
 import React, { useState } from "react";
+=======
+import React from "react";
+>>>>>>> 30370c34c8c2fb5a6f4820bad3ebc61b30289c15
 import { useNavigate } from "react-router-dom";
 
 function Login() {
   const navigate = useNavigate()
+<<<<<<< HEAD
   const creadentials ={
     username:'Pratiksha',
     password:'Pratiksha@123'
   }
   const [inputUserName, setInputUserName] = useState('')
   const [inputPassword, setInputPassword] = useState('')
+=======
+>>>>>>> 30370c34c8c2fb5a6f4820bad3ebc61b30289c15
   const containerStyle = {
     backgroundColor: "#fff",
     padding: "20px",
@@ -36,6 +43,7 @@ function Login() {
     borderRadius: "4px",
     cursor: "pointer",
   };
+<<<<<<< HEAD
   function Login(e) {
     console.log( inputUserName, inputPassword)
     if(inputUserName == creadentials.username && inputPassword == creadentials.password){
@@ -45,6 +53,12 @@ function Login() {
       alert('Check creadentials')
     }
 
+=======
+  function newData(e) {
+    localStorage.setItem("isLoggedIn", true);
+    console.log(localStorage.isLoggedIn);
+    navigate('/')
+>>>>>>> 30370c34c8c2fb5a6f4820bad3ebc61b30289c15
 
   }
   return (
@@ -67,7 +81,11 @@ function Login() {
           style={inputStyle}
           onChange={(e)=>setInputPassword(e.target.value)}
         />
+<<<<<<< HEAD
         <button type="submit" style={buttonStyle} onClick={Login}>       
+=======
+        <button type="submit" style={buttonStyle} onClick={newData}>       
+>>>>>>> 30370c34c8c2fb5a6f4820bad3ebc61b30289c15
           Login
         </button>
       </div>
