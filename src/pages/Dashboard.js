@@ -5,7 +5,6 @@ function Dashboard() {
   const [cart, setCart] = useState("false");
 
   function addToCart() {
-    console.log("button clicked");
     setCart(true);
   }
 

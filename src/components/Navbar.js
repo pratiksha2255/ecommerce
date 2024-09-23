@@ -1,9 +1,11 @@
 import React from "react";
 import { Navbar, Nav, Container } from "react-bootstrap";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 function NavbarHeader() {
   const [cart, setCartCount] = useState(0);
+  const navigate = useNavigate();
   const navStyle = {
     backgroundColor: "rgb(20 67 115)", // Light background
     padding: "20px",
@@ -14,6 +16,10 @@ function NavbarHeader() {
     fontWeight: "bold",
     marginRight: "50px",
   };
+  function logout() {
+    localStorage.removeItem("isLoggedIn");
+    navigate("/login");
+  }
 
   return (
     <>
@@ -29,8 +35,8 @@ function NavbarHeader() {
             <Nav.Link href="/contact" style={navLinkStyle}>
               Contact
             </Nav.Link>
-            <Nav.Link href="/login" style={navLinkStyle}>
-              Login
+            <Nav.Link onClick={() => logout()} style={navLinkStyle}>
+              Logout
             </Nav.Link>
             <Nav.Link href="/cart" style={navLinkStyle}>
               Cart {cart}
