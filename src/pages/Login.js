@@ -1,6 +1,8 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 function Login() {
+  const navigate = useNavigate()
   const containerStyle = {
     backgroundColor: "#fff",
     padding: "20px",
@@ -31,6 +33,8 @@ function Login() {
   function newData(e) {
     localStorage.setItem("isLoggedIn", true);
     console.log(localStorage.isLoggedIn);
+    navigate('/')
+
   }
   return (
     <>
@@ -51,8 +55,7 @@ function Login() {
           required
           style={inputStyle}
         />
-        <button type="submit" style={buttonStyle} onClick={newData}>
-          {" "}
+        <button type="submit" style={buttonStyle} onClick={newData}>       
           Login
         </button>
       </div>
