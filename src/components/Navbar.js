@@ -1,7 +1,9 @@
 import React from "react";
 import { Navbar, Nav, Container } from "react-bootstrap";
+import { useState } from "react";
 
 function NavbarHeader() {
+  const [cart, setCartCount] = useState(0);
   const navStyle = {
     backgroundColor: "rgb(20 67 115)", // Light background
     padding: "20px",
@@ -29,6 +31,9 @@ function NavbarHeader() {
             </Nav.Link>
             <Nav.Link href="/login" style={navLinkStyle}>
               Login
+            </Nav.Link>
+            <Nav.Link href="/cart" style={navLinkStyle}>
+              Cart {cart}
             </Nav.Link>
           </Nav>
         </Container>
