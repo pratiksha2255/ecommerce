@@ -10,9 +10,9 @@ export const RouterView = () => {
     <>
       <Routes>
         <Route path="/" element={withLogging(Dashboard)()} />
-        <Route path="/about" element={withLogging(About)} />
-        <Route path="/dashboard" element={withLogging(Dashboard)} />
-        <Route path="/contact" element={withLogging(Contact)} />
+        <Route path="/about" element={withLogging(About)()} />
+        <Route path="/dashboard" element={withLogging(Dashboard)()} />
+        <Route path="/contact" element={withLogging(Contact)()} />
         <Route path="/login" element={<Login />} />
       </Routes>
     </>
