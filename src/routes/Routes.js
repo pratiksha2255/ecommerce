@@ -1,10 +1,10 @@
 import { Route, Routes } from "react-router-dom";
-import About from "../pages/About";
-import Dashboard from "../pages/Dashboard";
-import Contact from "../pages/Contact";
-import Login from "../pages/Login";
-import { withLogging } from "../HOC/Outlet";
-import ProductListing from "../pages/ProductListing";
+import About from "../pages/About/About";
+import Dashboard from "../pages/Dashboard/Dashboard";
+import Contact from "../pages/Contact/Contact";
+import Login from "../pages/Login/Login";
+import { withLogging } from "../ProtectedRoutes/Outlet";
+import ProductListing from "../pages/ProductListing/ProductListing";
 
 export const RouterView = () => {
   return (

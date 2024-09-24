@@ -2,13 +2,13 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 function Login() {
-  const navigate = useNavigate()
-  const creadentials ={
-    username:'Pratiksha',
-    password:'Pratiksha@123'
-  }
-  const [inputUserName, setInputUserName] = useState('')
-  const [inputPassword, setInputPassword] = useState('')
+  const navigate = useNavigate();
+  const creadentials = {
+    username: "Pratiksha",
+    password: "Pratiksha@123",
+  };
+  const [inputUserName, setInputUserName] = useState("");
+  const [inputPassword, setInputPassword] = useState("");
   const containerStyle = {
     backgroundColor: "#fff",
     padding: "20px",
@@ -37,14 +37,15 @@ function Login() {
     cursor: "pointer",
   };
   function Login(e) {
-    if(inputUserName == creadentials.username && inputPassword == creadentials.password){
+    if (
+      inputUserName == creadentials.username &&
+      inputPassword == creadentials.password
+    ) {
       localStorage.setItem("isLoggedIn", true);
-      navigate('/')
-    }else{
-      alert('Check creadentials')
+      navigate("/");
+    } else {
+      alert("Check creadentials");
     }
-
-
   }
   return (
     <>
@@ -56,7 +57,7 @@ function Login() {
           placeholder="Username"
           required
           style={inputStyle}
-          onChange={(e)=>setInputUserName(e.target.value)}
+          onChange={(e) => setInputUserName(e.target.value)}
         />
         <input
           type="password"
@@ -64,9 +65,9 @@ function Login() {
           placeholder="Password"
           required
           style={inputStyle}
-          onChange={(e)=>setInputPassword(e.target.value)}
+          onChange={(e) => setInputPassword(e.target.value)}
         />
-        <button type="submit" style={buttonStyle} onClick={Login}>       
+        <button type="submit" style={buttonStyle} onClick={Login}>
           Login
         </button>
       </div>
