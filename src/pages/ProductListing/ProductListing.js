@@ -1,11 +1,19 @@
 import React from "react";
 import { useLocation, useParams } from "react-router-dom";
+import { useState, useEffect } from "react";
 import "./ProductListing.css"; // Import a CSS file for custom styles
 
 function ProductListing() {
-  const { id } = useParams(); // to retrieve the product id from the URL
-  const location = useLocation();
-  const { product } = location.state || {}; // Access the passed product from state
+  const { id } = useParams();
+  const [product, setProduct] = useState([]);
+
+  useEffect(() => {
+    fetch(`https://fakestoreapi.com/products/${id}`)
+      .then((response) => response.json())
+      .then((data) => {
+        setProduct(data);
+      });
+  }, []);
 
   return (
     <>
