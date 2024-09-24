@@ -37,7 +37,6 @@ function Login() {
     cursor: "pointer",
   };
   function Login(e) {
-    console.log( inputUserName, inputPassword)
     if(inputUserName == creadentials.username && inputPassword == creadentials.password){
       localStorage.setItem("isLoggedIn", true);
       navigate('/')
