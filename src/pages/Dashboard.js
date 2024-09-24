@@ -1,11 +1,21 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import "./Dashboard.css";
 
 function Dashboard() {
   const [products, setProducts] = useState([]);
-  const [cart, setCart] = useState("false");
+  const [cart, setCart] = useState({});
+  const navigate = useNavigate();
 
-  function addToCart() {
-    setCart(true);
+  function addToCart(id) {
+    setCart((prevCart) => ({
+      ...prevCart,
+      [id]: true,
+    }));
+  }
+
+  function viewProduct(id, product) {
+    navigate(`/product_listing/${id}`, { state: { product } });
   }
 
   useEffect(() => {
@@ -23,15 +33,25 @@ function Dashboard() {
       <div className="products-container">
         {products.length > 0 ? (
           products.slice(0, 4).map((product) => (
-            <div className="product-card" key={product.id}>
-              <h3>{product.title}</h3>
+            <div key={product.id}>
+              <h4>{product.title}</h4>
+              <img className="img" src={product.image} />
+              <br></br>
               <p>Price: ${product.price}</p>
-              <img className="img" src={product.image} alt={product.title} />
 
-              {cart == "false" ? (
-                <button onClick={addToCart}>Add to Cart</button>
+              <button
+                className="btns"
+                onClick={() => viewProduct(product.id, product)}
+              >
+                View Product
+              </button>
+
+              {!cart[product.id] ? (
+                <button className="btns" onClick={() => addToCart(product.id)}>
+                  Add to Cart
+                </button>
               ) : (
-                <button>Item added to Cart</button>
+                <button disabled>Item added to Cart</button>
               )}
             </div>
           ))

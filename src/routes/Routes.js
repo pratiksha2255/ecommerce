@@ -4,6 +4,7 @@ import Dashboard from "../pages/Dashboard";
 import Contact from "../pages/Contact";
 import Login from "../pages/Login";
 import { withLogging } from "../HOC/Outlet";
+import ProductListing from "../pages/ProductListing";
 
 export const RouterView = () => {
   return (
@@ -13,6 +14,10 @@ export const RouterView = () => {
         <Route path="/about" element={withLogging(About)()} />
         <Route path="/dashboard" element={withLogging(Dashboard)()} />
         <Route path="/contact" element={withLogging(Contact)()} />
+        <Route
+          path="/product_listing/:id"
+          element={withLogging(ProductListing)()}
+        />
         <Route path="/login" element={<Login />} />
       </Routes>
     </>
