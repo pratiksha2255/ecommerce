@@ -1,17 +1,20 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Dashboard.css";
+import { useDispatch } from "react-redux";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faShoppingCart } from "@fortawesome/free-solid-svg-icons";
+import { faEye } from "@fortawesome/free-solid-svg-icons";
+import { incrementcart } from "../../stores/slices";
 
 function Dashboard() {
   const [products, setProducts] = useState([]);
-  const [cart, setCart] = useState({});
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   function addToCart(id) {
-    setCart((prevCart) => ({
-      ...prevCart,
-      [id]: true,
-    }));
+    console.log("++++++++++++++++");
+    dispatch(incrementcart());
   }
 
   function viewProduct(id, product) {
@@ -29,8 +32,8 @@ function Dashboard() {
   return (
     <>
       <img src="/shopping.webp" className="banner" alt="Shopping banner"></img>
-      <h2>Products</h2>
-      <div className="products-container">
+      {/* <h2>Products</h2> */}
+      <div className="products-container ">
         {products.length > 0 ? (
           products.slice(0, 4).map((product) => (
             <div key={product.id}>
@@ -38,21 +41,15 @@ function Dashboard() {
               <img className="img" src={product.image} />
               <br></br>
               <p>Price: ${product.price}</p>
-
               <button
-                className="btns"
+                className="viewbtns"
                 onClick={() => viewProduct(product.id, product)}
               >
-                View Product
+                <FontAwesomeIcon icon={faEye} />
               </button>
-
-              {!cart[product.id] ? (
-                <button className="btns" onClick={() => addToCart(product.id)}>
-                  Add to Cart
-                </button>
-              ) : (
-                <button disabled>Item added to Cart</button>
-              )}
+              <button className="btns" onClick={() => addToCart(product.id)}>
+                <FontAwesomeIcon icon={faShoppingCart} /> {/* Cart Icon */}
+              </button>
             </div>
           ))
         ) : (

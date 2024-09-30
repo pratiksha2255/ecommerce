@@ -40,9 +40,18 @@ h3 {
   color: #888;
 }
 
+.viewbtns {
+  background-color: #ccccc5;
+  color: rgb(10, 2, 2);
+  padding: 04px 12px;
+  border-radius: 5px;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
 .btns {
-  background-color: #0f1110;
-  color: white;
+  background-color: #c6cfcb;
+  color: rgb(11, 12, 11);
   padding: 04px 12px;
   border-radius: 5px;
   font-size: 1rem;

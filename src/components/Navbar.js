@@ -2,9 +2,10 @@ import React from "react";
 import { Navbar, Nav, Container } from "react-bootstrap";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 function NavbarHeader() {
-  const [cart, setCartCount] = useState(0);
+  const cart = useSelector((state) => state.cart.value);
   const navigate = useNavigate();
   const navStyle = {
     backgroundColor: "rgb(20 67 115)", // Light background
