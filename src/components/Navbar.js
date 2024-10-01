@@ -1,7 +1,7 @@
 import React from "react";
 import { Navbar, Nav, Container } from "react-bootstrap";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 function NavbarHeader() {
@@ -19,6 +19,7 @@ function NavbarHeader() {
   };
   function logout() {
     localStorage.removeItem("isLoggedIn");
+
     navigate("/login");
   }
 
@@ -30,29 +31,27 @@ function NavbarHeader() {
     <>
       <Navbar style={navStyle} bg="light" data-bs-theme="dark">
         <Container>
-          <Nav style={{ marginLeft: "auto" }}>
-            <Nav.Link href="/dashboard" style={navLinkStyle}>
-              Dashboard
-            </Nav.Link>
-            <Nav.Link href="/about" style={navLinkStyle}>
-              About Us
-            </Nav.Link>
-            <Nav.Link href="/contact" style={navLinkStyle}>
-              Contact
-            </Nav.Link>
-            {localStorage.getItem("isLoggedIn") ? (
-              <Nav.Link onClick={() => logout()} style={navLinkStyle}>
-                Logout
-              </Nav.Link>
-            ) : (
-              <Nav.Link onClick={() => login()} style={navLinkStyle}>
-                Login
-              </Nav.Link>
-            )}
-            <Nav.Link href="/cart" style={navLinkStyle}>
-              Cart {cart}
-            </Nav.Link>
-          </Nav>
+          <Link to="/dashboard" style={navLinkStyle}>
+            Dashboard
+          </Link>
+          <Link to="/about" style={navLinkStyle}>
+            About Us
+          </Link>
+          <Link to="/contact" style={navLinkStyle}>
+            Contact
+          </Link>
+          {localStorage.getItem("isLoggedIn") ? (
+            <Link onClick={() => logout()} style={navLinkStyle}>
+              Logout
+            </Link>
+          ) : (
+            <Link onClick={() => login()} style={navLinkStyle}>
+              Login
+            </Link>
+          )}
+          <Link to="/cart" style={navLinkStyle}>
+            Cart {cart}
+          </Link>
         </Container>
       </Navbar>
     </>

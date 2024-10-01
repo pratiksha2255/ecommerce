@@ -8,13 +8,16 @@ import { faEye } from "@fortawesome/free-solid-svg-icons";
 import { incrementcart } from "../../stores/slices";
 
 function Dashboard() {
+  let cart_items = JSON.parse(localStorage.getItem("cart_items")) || [];
   const [products, setProducts] = useState([]);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  function addToCart(id) {
-    console.log("++++++++++++++++");
+  function addToCart(product) {
     dispatch(incrementcart());
+    cart_items.push(product);
+    localStorage.setItem("cart_items", JSON.stringify(cart_items));
+    console.log("first", cart_items);
   }
 
   function viewProduct(id, product) {
@@ -47,7 +50,7 @@ function Dashboard() {
               >
                 <FontAwesomeIcon icon={faEye} />
               </button>
-              <button className="btns" onClick={() => addToCart(product.id)}>
+              <button className="btns" onClick={() => addToCart(product)}>
                 <FontAwesomeIcon icon={faShoppingCart} /> {/* Cart Icon */}
               </button>
             </div>

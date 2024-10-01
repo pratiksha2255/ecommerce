@@ -1,0 +1,134 @@
+.cart-page {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 40px 20px;
+  font-family: Arial, sans-serif;
+}
+
+h2 {
+  text-align: center;
+  font-size: 32px;
+  margin-bottom: 40px;
+}
+
+.cart-items {
+  border-top: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+}
+
+.cart-item {
+  display: flex;
+  align-items: center;
+  padding: 20px 0;
+  border-top: 1px solid #ddd;
+}
+
+.cart-item img {
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+  margin-right: 20px;
+}
+
+.item-details {
+  flex-grow: 1;
+}
+
+.item-details h3 {
+  font-size: 18px;
+  margin: 0 0 5px 0;
+}
+
+.item-details p {
+  margin: 5px 0;
+  color: #888;
+}
+
+.item-details p:first-of-type {
+  font-weight: bold;
+  color: black;
+}
+
+.item-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-width: 200px;
+}
+
+.item-actions p {
+  font-size: 16px;
+  margin: 0;
+}
+
+.quantity-control {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.quantity-control input {
+  width: 40px;
+  text-align: center;
+  padding: 5px;
+  border: 1px solid #ddd;
+  border-radius: 3px;
+}
+
+.quantity-control button {
+  padding: 5px 10px;
+  border: 1px solid #ddd;
+  background: none;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.cart-summary {
+  margin-top: 40px;
+  text-align: right;
+}
+
+.cart-summary p {
+  font-size: 18px;
+  margin: 10px 0;
+}
+
+.checkout-btn {
+  background-color: #32700e;
+  color: white;
+  padding: 15px 30px;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.checkout-btn:hover {
+  background-color: #32700e;
+}
+
+.remove-btn {
+  background-color: #ff6b6b; /* Light red background */
+  color: white; /* White text */
+  border: none; /* Remove default border */
+  padding: 10px 20px; /* Add padding for a more clickable button */
+  font-size: 16px; /* Adjust the font size */
+  border-radius: 5px; /* Rounded corners */
+  cursor: pointer; /* Pointer cursor on hover */
+  transition: background-color 0.3s ease, transform 0.2s ease; /* Smooth transition */
+}
+
+.remove-btn:hover {
+  background-color: #ff4b4b; /* Darker red on hover */
+  transform: scale(1.05); /* Slight zoom-in effect on hover */
+}
+
+.remove-btn:active {
+  background-color: #ff3b3b; /* Even darker red when clicked */
+  transform: scale(0.95); /* Shrinks slightly when clicked */
+}
+
+.remove-btn:focus {
+  outline: none; /* Remove the default focus outline */
+  box-shadow: 0 0 5px rgba(255, 107, 107, 0.8); /* Add a custom focus shadow */
+}
