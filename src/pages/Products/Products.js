@@ -8,11 +8,14 @@ function Products() {
   let cart_items = JSON.parse(localStorage.getItem("cart_items")) || [];
   const [products, setProducts] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
+  const [productsPerPage] = useState(6); // Adjust this to show more/less products per page
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const handleSearch = (event) => {
     setSearchQuery(event.target.value);
+    setCurrentPage(1); // Reset to first page on new search
   };
 
   function addToCart(product) {
@@ -24,6 +27,7 @@ function Products() {
   function viewProduct(id, product) {
     navigate(`/productDetails/${id}`, { state: { product } });
   }
+
   useEffect(() => {
     fetch(`https://dummyjson.com/products/search?q=${searchQuery}`)
       .then((response) => response.json())
@@ -31,6 +35,21 @@ function Products() {
         setProducts(data.products);
       });
   }, [searchQuery]);
+
+  // Get current products for the page
+  const indexOfLastProduct = currentPage * productsPerPage;
+  const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
+  const currentProducts = products.slice(
+    indexOfFirstProduct,
+    indexOfLastProduct
+  );
+
+  // Get the total number of pages
+  const totalPages = Math.ceil(products.length / productsPerPage);
+
+  // Change page
+  const handlePageChange = (event) =>
+    setCurrentPage(Number(event.target.value));
 
   return (
     <>
@@ -43,9 +62,21 @@ function Products() {
           className="search-input"
         />
       </div>
+
+      <div className="pagination-dropdown">
+        <label htmlFor="pagination">Select Page: </label>
+        <select id="pagination" value={currentPage} onChange={handlePageChange}>
+          {Array.from({ length: totalPages }, (_, index) => (
+            <option key={index + 1} value={index + 1}>
+              Page {index + 1}
+            </option>
+          ))}
+        </select>
+      </div>
+
       <div className="products-container ">
-        {products.length > 0 ? (
-          products.map((product) => (
+        {currentProducts.length > 0 ? (
+          currentProducts.map((product) => (
             <div key={product.id}>
               <h4>{product.title}</h4>
               <img
