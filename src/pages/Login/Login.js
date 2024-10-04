@@ -4,8 +4,8 @@ import { useNavigate } from "react-router-dom";
 function Login() {
   const navigate = useNavigate();
   const creadentials = {
-    username: "",
-    password: "",
+    username: "Pratiksha",
+    password: "Pratiksha@123",
   };
   const [inputUserName, setInputUserName] = useState("");
   const [inputPassword, setInputPassword] = useState("");

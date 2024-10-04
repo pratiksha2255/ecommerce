@@ -7,14 +7,14 @@ import { incrementcart } from "../../stores/slices";
 function Products() {
   let cart_items = JSON.parse(localStorage.getItem("cart_items")) || [];
   const [products, setProducts] = useState([]);
-  const [search, setSearch] = useState([""]);
+  const [searchQuery, setSearchQuery] = useState("");
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const navLinkStyle = {
-    color: "rgb(6 17 7)",
-    float: "bold",
-    marginRight: "50px",
+
+  const handleSearch = (event) => {
+    setSearchQuery(event.target.value);
   };
+
   function addToCart(product) {
     dispatch(incrementcart());
     cart_items.push(product);
@@ -24,14 +24,13 @@ function Products() {
   function viewProduct(id, product) {
     navigate(`/productDetails/${id}`, { state: { product } });
   }
-  const api_url = `https://dummyjson.com/products`;
   useEffect(() => {
-    fetch(api_url)
+    fetch(`https://dummyjson.com/products/search?q=${searchQuery}`)
       .then((response) => response.json())
       .then((data) => {
         setProducts(data.products);
       });
-  }, []);
+  }, [searchQuery]);
 
   return (
     <>
@@ -39,11 +38,10 @@ function Products() {
         <input
           type="text"
           placeholder="Search products..."
-          // value={searchTerm}
-          // onChange={handleSearch}
+          value={searchQuery}
+          onChange={handleSearch}
           className="search-input"
         />
-        <button className="search-button">Search</button>
       </div>
       <div className="products-container ">
         {products.length > 0 ? (

@@ -31,7 +31,7 @@ function CartPage() {
           cartItems &&
           cartItems.map((item) => (
             <div key={item.id} className="cart-item">
-              <img src={item.image} alt={item.name} />
+              <img src={item.thumbnail} alt={item.name} />
               <div className="item-details">
                 <h3>{item.name}</h3>
                 {/* <p>Quantity: {item.quantity}</p> */}
