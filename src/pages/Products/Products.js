@@ -1,15 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Products.css";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { incrementcart } from "../../stores/slices";
+import { getProducts } from "../../stores/productsStore";
 
 function Products() {
   let cart_items = JSON.parse(localStorage.getItem("cart_items")) || [];
-  const [products, setProducts] = useState([]);
+  const products = useSelector((state) => state.productsStore.productList);
   const [searchQuery, setSearchQuery] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
-  const [productsPerPage] = useState(6); // Adjust this to show more/less products per page
+  const [productsPerPage] = useState(10); // Adjust this to show more/less products per page
+  useEffect(() => {
+  }, [products]);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -29,11 +32,12 @@ function Products() {
   }
 
   useEffect(() => {
-    fetch(`https://dummyjson.com/products/search?q=${searchQuery}`)
-      .then((response) => response.json())
-      .then((data) => {
-        setProducts(data.products);
-      });
+    // fetch(`https://dummyjson.com/products/search?q=${searchQuery}`)
+    //   .then((response) => response.json())
+    //   .then((data) => {
+    //     setProducts(data.products);
+    //   });
+    dispatch(getProducts());
   }, [searchQuery]);
 
   // Get current products for the page
@@ -46,7 +50,6 @@ function Products() {
 
   // Get the total number of pages
   const totalPages = Math.ceil(products.length / productsPerPage);
-
   // Change page
   const handlePageChange = (event) =>
     setCurrentPage(Number(event.target.value));
