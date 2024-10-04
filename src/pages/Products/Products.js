@@ -23,14 +23,15 @@ function Products() {
   }
 
   function viewProduct(id, product) {
-    navigate(`/product_listing/${id}`, { state: { product } });
+    navigate(`/productDetails/${id}`, { state: { product } });
   }
-  const api_url = `https://fakestoreapi.com/products/`;
+  const api_url = `https://dummyjson.com/products`;
   useEffect(() => {
     fetch(api_url)
       .then((response) => response.json())
       .then((data) => {
-        setProducts(data);
+        setProducts(data.products);
+        console.log(data, "response");
       });
   }, []);
 
@@ -53,7 +54,7 @@ function Products() {
               <h4>{product.title}</h4>
               <img
                 className="img"
-                src={product.image}
+                src={product.thumbnail}
                 onClick={() => viewProduct(product.id, product)}
               />
               <br></br>

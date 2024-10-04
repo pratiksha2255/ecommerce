@@ -1,14 +1,14 @@
 import React from "react";
 import { useLocation, useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
-import "./ProductListing.css"; // Import a CSS file for custom styles
+import "./ProductDetails.style.css"; // Import a CSS file for custom styles
 
-function ProductListing() {
+function ProductDetails() {
   const { id } = useParams();
   const [product, setProduct] = useState([]);
 
   useEffect(() => {
-    fetch(`https://fakestoreapi.com/products/${id}`)
+    fetch(`https://dummyjson.com/products/${id}`)
       .then((response) => response.json())
       .then((data) => {
         setProduct(data);
@@ -22,7 +22,7 @@ function ProductListing() {
         {product ? (
           <div className="product-card">
             <div className="product-image">
-              <img src={product.image} alt={product.title} />
+              <img src={product.thumbnail} alt={product.title} />
             </div>
             <div className="product-info">
               <h3>{product.title}</h3>
@@ -39,4 +39,4 @@ function ProductListing() {
   );
 }
 
-export default ProductListing;
+export default ProductDetails;

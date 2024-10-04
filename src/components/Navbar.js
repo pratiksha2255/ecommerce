@@ -34,6 +34,9 @@ function NavbarHeader() {
           <Link to="/dashboard" style={navLinkStyle}>
             Dashboard
           </Link>
+          <Link to="/products" style={navLinkStyle}>
+            Products
+          </Link>
           <Link to="/about" style={navLinkStyle}>
             About Us
           </Link>

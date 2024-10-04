@@ -4,9 +4,9 @@ import Dashboard from "../pages/Dashboard/Dashboard";
 import Contact from "../pages/Contact/Contact";
 import Login from "../pages/Login/Login";
 import { withLogging } from "../ProtectedRoutes/Outlet";
-import ProductListing from "../pages/ProductListing/ProductListing";
 import Cart from "../pages/Cart/Cart";
 import Products from "../pages/Products/Products";
+import ProductDetails from "../pages/ProductDetails/ProductDetails";
 
 export const RouterView = () => {
   return (
@@ -17,10 +17,10 @@ export const RouterView = () => {
         <Route path="/dashboard" element={withLogging(Dashboard)()} />
         <Route path="/contact" element={withLogging(Contact)()} />
         <Route path="/cart" element={withLogging(Cart)()} />
-        <Route path="/all_products" element={withLogging(Products)()} />
+        <Route path="/products" element={withLogging(Products)()} />
         <Route
-          path="/product_listing/:id"
-          element={withLogging(ProductListing)()}
+          path="/productDetails/:id"
+          element={withLogging(ProductDetails)()}
         />
         <Route path="/login" element={<Login />} />
       </Routes>

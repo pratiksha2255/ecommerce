@@ -3,7 +3,6 @@ import { useNavigate } from "react-router-dom";
 import "./Dashboard.css";
 import { useDispatch } from "react-redux";
 import { incrementcart } from "../../stores/slices";
-import { Link } from "react-router-dom";
 
 function Dashboard() {
   let cart_items = JSON.parse(localStorage.getItem("cart_items")) || [];
@@ -23,23 +22,20 @@ function Dashboard() {
   }
 
   function viewProduct(id, product) {
-    navigate(`/product_listing/${id}`, { state: { product } });
+    navigate(`/productDetails/${id}`, { state: { product } });
   }
 
   useEffect(() => {
-    fetch("https://fakestoreapi.com/products")
+    fetch("https://dummyjson.com/products")
       .then((response) => response.json())
       .then((data) => {
-        setProducts(data);
+        setProducts(data.products);
       });
   }, []);
 
   return (
     <>
       <img src="/shopping.webp" className="banner" alt="Shopping banner"></img>
-      <Link to="/all_products" style={navLinkStyle}>
-        View All Products
-      </Link>
       <div className="products-container ">
         {products.length > 0 ? (
           products.slice(0, 4).map((product) => (
@@ -47,7 +43,7 @@ function Dashboard() {
               <h4>{product.title}</h4>
               <img
                 className="img"
-                src={product.image}
+                src={product.thumbnail}
                 onClick={() => viewProduct(product.id, product)}
               />
               <br></br>
