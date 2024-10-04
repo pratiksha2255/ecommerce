@@ -19,7 +19,6 @@ function Products() {
     dispatch(incrementcart());
     cart_items.push(product);
     localStorage.setItem("cart_items", JSON.stringify(cart_items));
-    console.log("first", cart_items);
   }
 
   function viewProduct(id, product) {
@@ -31,7 +30,6 @@ function Products() {
       .then((response) => response.json())
       .then((data) => {
         setProducts(data.products);
-        console.log(data, "response");
       });
   }, []);
 
@@ -53,7 +51,8 @@ function Products() {
             <div key={product.id}>
               <h4>{product.title}</h4>
               <img
-                className="img"
+                alt=""
+                className="Girl in a jacket"
                 src={product.thumbnail}
                 onClick={() => viewProduct(product.id, product)}
               />

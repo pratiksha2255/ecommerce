@@ -18,7 +18,6 @@ function Dashboard() {
     dispatch(incrementcart());
     cart_items.push(product);
     localStorage.setItem("cart_items", JSON.stringify(cart_items));
-    console.log("first", cart_items);
   }
 
   function viewProduct(id, product) {
