@@ -17,7 +17,7 @@ h2 {
 .products-container {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 20px;
+  gap: 90px;
   padding: 20px;
 }
 
@@ -69,4 +69,31 @@ h3 {
   float: right;
   border: none;
   margin-right: 20px;
+}
+
+.search-container {
+  margin: 20px 0;
+  display: flex;
+  justify-content: center;
+}
+
+.search-input {
+  width: 300px;
+  padding: 10px;
+  margin-right: 10px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+.search-button {
+  padding: 10px 15px;
+  background-color: green;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.search-button:hover {
+  background-color: darkgreen;
 }

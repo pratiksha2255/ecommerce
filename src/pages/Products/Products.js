@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import "./Dashboard.css";
+import "./Products.css";
 import { useDispatch } from "react-redux";
 import { incrementcart } from "../../stores/slices";
-import { Link } from "react-router-dom";
 
-function Dashboard() {
+function Products() {
   let cart_items = JSON.parse(localStorage.getItem("cart_items")) || [];
   const [products, setProducts] = useState([]);
+  const [search, setSearch] = useState([""]);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const navLinkStyle = {
@@ -25,9 +25,9 @@ function Dashboard() {
   function viewProduct(id, product) {
     navigate(`/product_listing/${id}`, { state: { product } });
   }
-
+  const api_url = `https://fakestoreapi.com/products/`;
   useEffect(() => {
-    fetch("https://fakestoreapi.com/products")
+    fetch(api_url)
       .then((response) => response.json())
       .then((data) => {
         setProducts(data);
@@ -36,13 +36,19 @@ function Dashboard() {
 
   return (
     <>
-      <img src="/shopping.webp" className="banner" alt="Shopping banner"></img>
-      <Link to="/all_products" style={navLinkStyle}>
-        View All Products
-      </Link>
+      <div className="search-container">
+        <input
+          type="text"
+          placeholder="Search products..."
+          // value={searchTerm}
+          // onChange={handleSearch}
+          className="search-input"
+        />
+        <button className="search-button">Search</button>
+      </div>
       <div className="products-container ">
         {products.length > 0 ? (
-          products.slice(0, 4).map((product) => (
+          products.map((product) => (
             <div key={product.id}>
               <h4>{product.title}</h4>
               <img
@@ -65,4 +71,4 @@ function Dashboard() {
   );
 }
 
-export default Dashboard;
+export default Products;
