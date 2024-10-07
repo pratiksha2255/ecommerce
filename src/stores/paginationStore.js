@@ -1,13 +1,13 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
-export const getProducts = createAsyncThunk(
-  "products/getProducts",
-  async (searchQuery) => {
+export const getPaginatedProducts = createAsyncThunk(
+  "products/getPaginatedProducts",
+  async (skip) => {
     try {
-      console.log(searchQuery, ":::::::::::::::::::::");
+      console.log(skip, "+++++++++++++++++++++");
       const response = await axios.get(
-        `https://dummyjson.com/products/search?q=${searchQuery}`
+        `https://dummyjson.com/products?limit=10&skip=${skip}`
       );
       return response.data;
     } catch (error) {
@@ -21,22 +21,22 @@ const initialState = {
   loading: "idle",
 };
 
-const productSclice = createSlice({
+const paginatedSclice = createSlice({
   name: "users",
   initialState,
   reducers: {},
   extraReducers: (builder) => {
-    builder.addCase(getProducts.pending, (state) => {
+    builder.addCase(getPaginatedProducts.pending, (state) => {
       state.loading = true;
     });
-    builder.addCase(getProducts.fulfilled, (state, action) => {
+    builder.addCase(getPaginatedProducts.fulfilled, (state, action) => {
       state.productList = action.payload.products;
       state.loading = false;
     });
-    builder.addCase(getProducts.rejected, (state) => {
+    builder.addCase(getPaginatedProducts.rejected, (state) => {
       state.loading = false;
     });
   },
 });
 
-export default productSclice.reducer;
+export default paginatedSclice.reducer;

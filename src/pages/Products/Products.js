@@ -4,21 +4,25 @@ import "./Products.css";
 import { useDispatch, useSelector } from "react-redux";
 import { incrementcart } from "../../stores/slices";
 import { getProducts } from "../../stores/productsStore";
+import { getPaginatedProducts } from "../../stores/paginationStore";
 
 function Products() {
   let cart_items = JSON.parse(localStorage.getItem("cart_items")) || [];
   const products = useSelector((state) => state.productsStore.productList);
+  const final_products = useSelector(
+    (state) => state.paginatedStore.productList
+  );
   const [searchQuery, setSearchQuery] = useState("");
-  const [currentPage, setCurrentPage] = useState(1);
-  const [productsPerPage] = useState(10); // Adjust this to show more/less products per page
-  useEffect(() => {
-  }, [products]);
+  const limit = Number(10);
+  const [skip, setSkip] = useState(0);
+
+  useEffect(() => {}, [products]);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const handleSearch = (event) => {
     setSearchQuery(event.target.value);
-    setCurrentPage(1); // Reset to first page on new search
+    setSkip(0);
   };
 
   function addToCart(product) {
@@ -32,27 +36,16 @@ function Products() {
   }
 
   useEffect(() => {
-    // fetch(`https://dummyjson.com/products/search?q=${searchQuery}`)
-    //   .then((response) => response.json())
-    //   .then((data) => {
-    //     setProducts(data.products);
-    //   });
-    dispatch(getProducts());
+    dispatch(getProducts(searchQuery));
   }, [searchQuery]);
 
-  // Get current products for the page
-  const indexOfLastProduct = currentPage * productsPerPage;
-  const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
-  const currentProducts = products.slice(
-    indexOfFirstProduct,
-    indexOfLastProduct
-  );
+  useEffect(() => {
+    dispatch(getPaginatedProducts(skip));
+  }, [skip]);
 
-  // Get the total number of pages
-  const totalPages = Math.ceil(products.length / productsPerPage);
-  // Change page
+  const totalPages = Math.ceil(products.length / limit);
   const handlePageChange = (event) =>
-    setCurrentPage(Number(event.target.value));
+    setSkip(Number(limit * event.target.value) - limit);
 
   return (
     <>
@@ -68,7 +61,7 @@ function Products() {
 
       <div className="pagination-dropdown">
         <label htmlFor="pagination">Select Page: </label>
-        <select id="pagination" value={currentPage} onChange={handlePageChange}>
+        <select id="pagination" value={setSkip} onChange={handlePageChange}>
           {Array.from({ length: totalPages }, (_, index) => (
             <option key={index + 1} value={index + 1}>
               Page {index + 1}
@@ -78,8 +71,8 @@ function Products() {
       </div>
 
       <div className="products-container ">
-        {currentProducts.length > 0 ? (
-          currentProducts.map((product) => (
+        {final_products.length > 0 ? (
+          final_products.map((product) => (
             <div key={product.id}>
               <h4>{product.title}</h4>
               <img
@@ -91,12 +84,12 @@ function Products() {
               <br></br>
               <p>Price: ${product.price}</p>
               <button className="btns" onClick={() => addToCart(product)}>
-                Add to Cart {/* Cart Icon */}
+                Add to Cart
               </button>
             </div>
           ))
         ) : (
-          <p className="loading-text">Loading products...</p>
+          <p className="loading-text">No product found...</p>
         )}
       </div>
     </>
