@@ -34,6 +34,7 @@ const productSclice = createSlice({
     });
     builder.addCase(getProducts.fulfilled, (state, action) => {
       state.productList = action.payload.products;
+      state.totalProducts = action.payload.total;
       state.loading = false;
     });
     builder.addCase(getProducts.rejected, (state) => {

@@ -8,8 +8,11 @@ import { getProducts } from "../../stores/productsStore";
 function Products() {
   let cart_items = JSON.parse(localStorage.getItem("cart_items")) || [];
   const products = useSelector((state) => state.productsStore.productList);
+  const totalProducts = useSelector(
+    (state) => state.productsStore.totalProducts
+  );
   const [searchQuery, setSearchQuery] = useState("");
-  const limit = Number(30);
+  const limit = Number(20);
   const [skip, setSkip] = useState(0);
   const data = {
     skip: skip,
@@ -39,8 +42,7 @@ function Products() {
   useEffect(() => {
     dispatch(getProducts(data));
   }, [data]);
-
-  const totalPages = Math.ceil(products.length / limit);
+  const totalPages = Math.ceil(totalProducts / limit);
   const handlePageChange = (event) =>
     setSkip(Number(limit * event.target.value) - limit);
 
