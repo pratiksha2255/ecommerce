@@ -3,12 +3,15 @@ import axios from "axios";
 
 export const getProducts = createAsyncThunk(
   "products/getProducts",
-  async (searchQuery) => {
+  async (data) => {
     try {
-      console.log(searchQuery, ":::::::::::::::::::::");
-      const response = await axios.get(
-        `https://dummyjson.com/products/search?q=${searchQuery}`
-      );
+      const response = data.searchQuery
+        ? await axios.get(
+            `https://dummyjson.com/products/search?q=${data.searchQuery}`
+          )
+        : await axios.get(
+            `https://dummyjson.com/products?limit=${data.limit}&skip=${data.skip}`
+          );
       return response.data;
     } catch (error) {
       return error;

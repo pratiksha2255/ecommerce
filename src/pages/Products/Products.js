@@ -4,17 +4,18 @@ import "./Products.css";
 import { useDispatch, useSelector } from "react-redux";
 import { incrementcart } from "../../stores/slices";
 import { getProducts } from "../../stores/productsStore";
-import { getPaginatedProducts } from "../../stores/paginationStore";
 
 function Products() {
   let cart_items = JSON.parse(localStorage.getItem("cart_items")) || [];
   const products = useSelector((state) => state.productsStore.productList);
-  const final_products = useSelector(
-    (state) => state.paginatedStore.productList
-  );
   const [searchQuery, setSearchQuery] = useState("");
-  const limit = Number(10);
+  const limit = Number(30);
   const [skip, setSkip] = useState(0);
+  const data = {
+    skip: skip,
+    limit: limit,
+    searchQuery: searchQuery,
+  };
 
   useEffect(() => {}, [products]);
   const dispatch = useDispatch();
@@ -36,12 +37,8 @@ function Products() {
   }
 
   useEffect(() => {
-    dispatch(getProducts(searchQuery));
-  }, [searchQuery]);
-
-  useEffect(() => {
-    dispatch(getPaginatedProducts(skip));
-  }, [skip]);
+    dispatch(getProducts(data));
+  }, [data]);
 
   const totalPages = Math.ceil(products.length / limit);
   const handlePageChange = (event) =>
@@ -61,7 +58,11 @@ function Products() {
 
       <div className="pagination-dropdown">
         <label htmlFor="pagination">Select Page: </label>
-        <select id="pagination" value={setSkip} onChange={handlePageChange}>
+        <select
+          id="pagination"
+          value={skip / limit + 1}
+          onChange={handlePageChange}
+        >
           {Array.from({ length: totalPages }, (_, index) => (
             <option key={index + 1} value={index + 1}>
               Page {index + 1}
@@ -71,8 +72,8 @@ function Products() {
       </div>
 
       <div className="products-container ">
-        {final_products.length > 0 ? (
-          final_products.map((product) => (
+        {products.length > 0 ? (
+          products.map((product) => (
             <div key={product.id}>
               <h4>{product.title}</h4>
               <img
