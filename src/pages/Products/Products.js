@@ -43,7 +43,7 @@ function Products() {
 
   useEffect(() => {
     dispatch(getProducts(data));
-  }, [data]);
+  }, [data.limit, data.searchQuery, data.skip]);
   const totalPages = Math.ceil(totalProducts / limit);
   const handlePageChange = (event) =>
     setSkip(Number(limit * event.target.value) - limit);
