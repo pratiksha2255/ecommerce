@@ -8,10 +8,12 @@ import { getProducts } from "../../stores/productsStore";
 function Products() {
   let cart_items = JSON.parse(localStorage.getItem("cart_items")) || [];
   const products = useSelector((state) => state.productsStore.productList);
+
   const totalProducts = useSelector(
     (state) => state.productsStore.totalProducts
   );
   const [searchQuery, setSearchQuery] = useState("");
+
   const limit = Number(20);
   const [skip, setSkip] = useState(0);
   const data = {
